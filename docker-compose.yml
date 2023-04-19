@@ -53,14 +53,6 @@ services:
     ports:
       - ${API_PORT}:${API_PORT}
     tty: true
-  # mysql:
-  #   platform: linux/amd64
-  #   image: mysql:8.0.29
-  #   environment:
-  #     - TZ: Asia/Tokyo
-  #   volumes:
-  #     - data-volume: /var/lib/mysql
 
 volumes:
   node_modules:
-  # data-volume:
