@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { StyledComponent } from "styled-components";
 import TabMenu from "../components/TabMenu";
 import Calendar from "../components/Calendar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 
-const StyledHeader = styled.div`
+const StyledHeader: StyledComponent<"div", any, {}> = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const StyledTaskMaven = styled.h1`
+const StyledTaskMaven: StyledComponent<"h1", any, {}> = styled.h1`
   margin-left: 20px;
   font-family: "Roboto", sans-serif;
 `;
 
-const StyledCurrentTime = styled.div`
+const StyledCurrentTime: StyledComponent<"div", any, {}> = styled.div`
   font-size: 20px;
   margin-right: 20px;
 `;
 
-const StyledCrockIcon = styled.span`
+const StyledCrockIcon: StyledComponent<"span", any, {}> = styled.span`
   margin-right: 10px;
 `;
 
@@ -37,13 +37,15 @@ function App() {
     },
   ];
 
-  const [currentTime, setCurrentTime] = useState(
-    new Date().toLocaleTimeString()
-  );
+  const [currentTime, setCurrentTime] = useState("");
 
-  setInterval(() => {
+  useEffect(() => {
     setCurrentTime(new Date().toLocaleTimeString());
-  }, 1000);
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString());
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div>

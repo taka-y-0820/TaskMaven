@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 interface Tab {
@@ -11,13 +11,13 @@ interface TabMenuProps {
   tabs: Tab[];
 }
 
-const TabMenuWrapper = styled.div`
+const TabMenuWrapper = styled.div<{}>`
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
 
-const TabMenuContent = styled.div`
+const TabMenuContent = styled.div<{}>`
   width: 100%;
   height: calc(100vh - 50px);
 `;
@@ -52,7 +52,11 @@ const TabMenuButtons = styled.div<TabMenuButtonsProps>`
 `;
 
 function TabMenu({ tabs }: TabMenuProps) {
-  const [selectedTab, setSelectedTab] = useState(tabs[0].key);
+  const [selectedTab, setSelectedTab] = useState<string>("");
+
+  useEffect(() => {
+    setSelectedTab(tabs[0].key);
+  }, []);
 
   const handleClick = (tab: string) => {
     setSelectedTab(tab);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const CalendarContainer = styled.div`
+const CalendarContainer = styled.div<{}>`
   border: 1px solid #ccc;
   padding: 16px;
   border-radius: 8px;
@@ -39,6 +39,14 @@ const CalendarContainer = styled.div`
     font-size: 14px;
     font-weight: normal;
     text-align: center;
+
+    &:nth-child(1) {
+      color: red;
+    }
+
+    &:nth-child(7) {
+      color: blue;
+    }
   }
 
   td {
@@ -46,6 +54,14 @@ const CalendarContainer = styled.div`
     border: 1px solid #ccc;
     font-size: 14px;
     text-align: center;
+
+    &:nth-child(1) {
+      color: red;
+    }
+
+    &:nth-child(7) {
+      color: blue;
+    }
   }
 `;
 
@@ -54,23 +70,20 @@ function Calendar() {
   const [date, setDate] = useState(new Date());
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
-  const startDate = new Date(year, month - 1, 1); // 月の最初の日を取得
-  const endDate = new Date(year, month, 0); // 月の最後の日を取得
-  const endDayCount = endDate.getDate(); // 月の末日
-  const startDay = startDate.getDay(); // 月の最初の日の曜日を取得
-  let dayCount = 1; // 日にちのカウント
+  const startDate = new Date(year, month - 1, 1);
+  const endDate = new Date(year, month, 0);
+  const endDayCount = endDate.getDate();
+  const startDay = startDate.getDay();
+  let dayCount = 1;
   const calendarRows = [];
 
-  // 日付セルを生成する
   for (let w = 0; w < 6; w++) {
     const calendarCells = [];
 
     for (let d = 0; d < 7; d++) {
       if (w === 0 && d < startDay) {
-        // 1行目で1日の曜日の前
         calendarCells.push(<td key={d}></td>);
       } else if (dayCount > endDayCount) {
-        // 末尾の日数を超えた
         calendarCells.push(<td key={d}></td>);
       } else {
         const isFistDay = dayCount === 1;
@@ -89,7 +102,6 @@ function Calendar() {
     }
   }
 
-  // 前月、次月のカレンダーを表示する関数
   const handlePrevMonth = () => {
     setDate(new Date(year, month - 2, 1));
   };

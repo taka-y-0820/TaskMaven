@@ -20,7 +20,7 @@ services:
   app:
     container_name: next_app
     build:
-      context: ./task_manage_front
+      context: ./task_maven_front
       dockerfile: Dockerfile
       args:
         - APP_PORT=${APP_PORT}
@@ -42,7 +42,7 @@ services:
   api:
     container_name: go_api
     build:
-      context: ./task_manage_back
+      context: ./task_maven_back
       dockerfile: Dockerfile
       args:
         - API_PORT=${API_PORT}
