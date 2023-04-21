@@ -1,4 +1,5 @@
-./src/node_modules/
+./src/node_modules
+./src/tsconfig.json
 ./src/npm-debug.log
 ./src/README.md
 ./src/.git*

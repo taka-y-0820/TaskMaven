@@ -36,7 +36,7 @@ const CalendarContainer = styled.div<{}>`
   th {
     padding: 8px;
     border: 1px solid #ccc;
-    font-size: 14px;
+    font-size: 1.3vw;
     font-weight: normal;
     text-align: center;
 
@@ -50,10 +50,10 @@ const CalendarContainer = styled.div<{}>`
   }
 
   td {
+    height: 15vw;
     padding: 8px;
     border: 1px solid #ccc;
-    font-size: 14px;
-    text-align: center;
+    font-size: 1.3vw;
 
     &:nth-child(1) {
       color: red;
@@ -62,6 +62,11 @@ const CalendarContainer = styled.div<{}>`
     &:nth-child(7) {
       color: blue;
     }
+  }
+
+  .today {
+    background-color: #add8e6;
+    color: #fff;
   }
 `;
 
@@ -76,6 +81,7 @@ function Calendar() {
   const startDay = startDate.getDay();
   let dayCount = 1;
   const calendarRows = [];
+  const currentDate = new Date();
 
   for (let w = 0; w < 6; w++) {
     const calendarCells = [];
@@ -89,7 +95,18 @@ function Calendar() {
         const isFistDay = dayCount === 1;
         const className = isFistDay ? "first-day" : "";
         calendarCells.push(
-          <td key={d} className={className}>
+          <td
+            align="left"
+            valign="top"
+            key={d}
+            className={`${
+              date.getFullYear() === currentDate.getFullYear() &&
+              date.getMonth() === currentDate.getMonth() &&
+              dayCount === currentDate.getDate()
+                ? "today"
+                : ""
+            } ${className}`}
+          >
             {dayCount}
           </td>
         );
